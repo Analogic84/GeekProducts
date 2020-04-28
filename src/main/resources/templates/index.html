@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> HARRY POTTER GEEK PRODUCTS WEBSITE</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="container1">
+        <div id="menu_horizontal" style="opacity: 1;">
+            <div id="header">
+                <h1><a href="#">GEEK PRODUCTS</a></h1>
+            </div>
+            <ul>
+                <li id="miniCarrito">
+
+                    <input type="button" class="btn btn-warning" id="button" onclick="location.href= 'cart.html'" />
+
+                </li>
+            </ul>
+        </div>
+
+        <img src="imagenes/escudo.png" width="100" height="100" class="derecha" />
+        <img src="imagenes/gafas.png" width="100" height="100" class="izquierda" />
+
+        <div id="contenido">
+            <div class="container mt-5">
+                <h2>Quick Search</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="search" id="busqueda" onkeyup="busqueda()" class="form-control" placeholder="Search Product      🔍" />
+                            <button type="button" class="btn btn-dark mb-2" id="boton">Search</button>
+                        </div>
+                        <ul class="my-2" id="resultado">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div id="tarjetaContainer">
+
+            </div>
+            <!--
+            <div class="card" style="width: 18rem;" id="tarjetaContainer">
+             
+                <img src="" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="cardName"></h5>
+                    <p class="cardPrice"></p>
+                    <p class="cardStock"></p>
+                    <a href="cart.html" class="btn btn-warning mb-2">Buy Now!!</a>
+                </div>
+            </div>
+        </div>
+
+         
+            <table class="tabla-productos">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Product</th>
+
+                        <th scope="col">Price</th>
+
+                        <th scope="col">Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+
+                </tbody>
+            </table> -->
+
+        </div>
+    </div>
+    </div>
+    <div class="footer">
+        <p>Copyright &copy; 2020 Ana Patricia Gómez Galindo, All rights reserved.</p>
+    </div>
+    <script src="productos.js"></script>
+
+
+</body>
+
+</html>

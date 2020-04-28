@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOPPING CART</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--<div id="miniCarritoFlotante" style="display: none;">
+        <p id="carritoVacio" style="display: block;">Carrito Vacio :(</p>
+        <div id="cajaBotones" style="position: absolute;">
+            <a id="btn_cerrar" class="boton omega" href="#" alt="Cerrar">X</a>
+        </div>-->
+
+    <body>
+        <div class="cart" class="container" style="max-width: 18rem;">
+            <div class="row">
+                <main id="items" class="col-sm-8 row" style="opacity: 0.9;"></main>
+
+                <aside class="col-sm-4" style="opacity: 0.9;">
+
+
+                    <button type="button" class="btn btn-warning mb-2" id="buttonBack" data-toggle="button" aria-pressed="false" autocomplete="off">
+                        <a href="index.html">Back</a>
+                    </button>
+
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title">Product description</h5>
+                <p class="card-text"> The card's content.</p>
+            </div>
+
+            <div id="buttonPay">
+                <button type="button" class="btn btn-warning mb-2">
+					<a>Check & Pay</a> 
+                </button>
+
+                <div id="caja-mensaje">
+                    <span id="mensaje-compra"></span>
+                </div>
+            </div>
+
+            <ul id="cart" class="list-group"></ul>
+            <hr>
+            <!-- Precio total -->
+            <p class="total" class="text-right">
+                Total: <span id="total"></span>
+                <img class="cart" src="imagenes/cart_1.png">
+
+            </p>
+        </div>
+        </aside>
+        </div>
+        </div>
+    </body>
+    </div>
+    <div class="footer">
+        <p>Copyright &copy; 2020 Ana Patricia Gómez Galindo, All rights reserved.</p>
+    </div>
+    <script src="cart.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+@charset "ISO-8859-1";
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    width: 960px;
+    margin: 0 auto;
+    padding: 5em;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'century gothic', 'sans-serif', 'verdana';
+    background-color: #94192c;
+}
+
+#menu_horizontal {
+    position: fixed;
+    width: 840px;
+    /* border-bottom: 1px solid rgb(255, 0, 0); */
+    top: 0%;
+    background: #94192c;
+    z-index: 2;
+    height: 84px;
+    box-shadow: 0px 1px 2px rgb(223, 220, 47);
+    opacity: 0;
+    -webkit-transition: all 800ms ease-in-out;
+    -moz-transition: all 800ms ease-in-out;
+    -ms-transition: all 800ms ease-in-out;
+    -o-transition: all 800ms ease-in-out;
+    transition: all 800ms ease-in-out;
+}
+
+#menu_horizontal>ul>li {
+    display: inline-block;
+    height: 39px;
+}
+
+#menu_horizontal>ul>li>a {
+    padding: 22px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    cursor: pointer;
+    margin: 8px;
+    width: auto;
+    position: absolute;
+    margin-top: 2%;
+    border-radius: 6px;
+    vertical-align: middle;
+}
+
+h1 a {
+    color: black;
+    text-shadow: yellow 0.1em 0.1em 0.2em;
+    transition: all 2s ease-out;
+    font-weight: 500;
+    letter-spacing: -3px;
+    font-size: 45px;
+    position: fixed;
+}
+
+li#miniCarrito {
+    padding: 4px;
+    margin: 0px;
+    position: absolute;
+    top: 0;
+    right: 13%;
+    box-shadow: 1px 1px 3px rgba(200, 200, 200, 0.08);
+    margin-top: 6px;
+}
+
+#button {
+    display: inline-block;
+    padding: 11px;
+    font-size: 8px;
+    cursor: pointer;
+    margin: 0;
+    margin-top: 7px;
+    border-radius: 6px;
+    vertical-align: baseline;
+    background: top center url(imagenes/cart_1.png) no-repeat;
+    text-indent: -5000px;
+    display: inline-block;
+    width: 100px;
+    height: 32px;
+    position: static;
+}
+
+ul#especificacionesCarrito {
+    display: inline-block;
+    vertical-align: top;
+    padding: 18px 9px;
+    margin-left: 58px;
+    cursor: default;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    color: #0f0d0d8f;
+    line-height: 1;
+    vertical-align: inherit;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 11px;
+    letter-spacing: 2px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#miniCarritoFlotante {
+    position: absolute;
+    z-index: 1;
+    right: -58%;
+    width: auto;
+    height: auto;
+    margin: 0;
+    top: 165%;
+    overflow: hidden;
+    background: white;
+    padding-top: 0px;
+    transition: all 5s ease-out;
+    border: 1px solid rgb(214, 214, 214);
+}
+
+img.derecha {
+    float: right;
+}
+
+img.izquierda {
+    float: left;
+}
+
+h2 {
+    color: black;
+    text-shadow: yellow 0.1em 0.1em 0.2em
+}
+
+.card {
+    margin: 2%;
+}
+
+
+/*
+.tabla-productos {
+    width: 100%;
+}
+
+.tabla-productos th {
+    background-color: black;
+    color: rgb(241, 188, 14);
+    padding: 1.5%;
+    text-align: center;
+}
+
+#cuerpoTabla {
+    border: 0.1em solid black;
+    border-collapse: collapse;
+}
+
+#tr,
+td {
+    text-align: center;
+}
+*/
+
+#buttonBack a {
+    color: black;
+}
+
+#buttonPay {
+    float: none;
+    text-align: center;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
