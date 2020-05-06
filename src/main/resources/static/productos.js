@@ -1,6 +1,8 @@
 console.log("Todo en orden");
 
 
+
+
 function getData() {
     fetch('http://localhost:8081/products/web', {
         method: 'GET',
@@ -15,17 +17,44 @@ function getData() {
 
     }).then(json => {
         data = json;
-        //llamar funcion 
+        producto = data;
+        //llamada a la funcion 
+        getInfo();
         //createTable();
         createTarjeta();
-        console.log(data);
+        myFilterFunction();
+        //console.log(data);
+
 
     }).catch(error => {
         console.log("Request failed:" + error.message);
     })
 }
 getData();
+
+/*
+ * FUNCION PARA OBTENER INFORMACION DEL DATA
+ */
+function getInfo() {
+    var producto = data;
+    var names = [];
+    var prices = [];
+    var available = [];
+
+    for (var i = 0; i < producto.length; i++) {
+
+        names.push(producto[i].name);
+        prices.push(producto[i].price);
+        available.push(producto[i].stock);
+
+        //console.log(name);
+
+    }
+    //console.log(names, prices, stocks);
+}
+
 /* 
+ * FUNCION QUE CREA UNA TABLA
 function createTable() {
     // se crea la tabla
     const cuerpoTabla = document.querySelector("#cuerpoTabla");
@@ -57,15 +86,17 @@ function createTable() {
     });
 } */
 
-function createTarjeta() {
+/*FUNCION QUE CREA LA TARJETA*/
+/*function createTarjeta() {
+
     const tarjetaContainer = document.getElementById("tarjetaContainer");
 
     data.forEach((producto, index) => {
         const card = document.createElement('div');
         card.classList = 'card-body';
-        // Construccion del contenido de la tarjeta
+        /*Construccion del contenido de la tarjeta
         const content = `
-     <div class="card">
+     <div class="card" >
     <div class="card-header" id="heading-${index}">
      <h5 class="mb-0">
             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-${index}" aria-expanded="true" aria-controls="collapse-${index}">
@@ -75,94 +106,107 @@ function createTarjeta() {
     </div>
 
     <div id="collapse-${index}" class="collapse show" aria-labelledby="heading-${index}" data-parent="#tarjetaContainer">
-    <div class="card-body">
+    <div class="card-body" id="resultado">
 
         <h5>${producto.name}</h5>
         <p>${producto.price}€</p>
-        <p>${producto.stock}</p>
+        <p>On Stock: ${producto.stock}</p>
       
     </div>
   </div>
 </div>
 `;
-
-        // Append newyly created card element to the container- Agregar elemento de tarjeta recién creado al tarjetaContainer
+        /* Append newyly created card element to the container- Agregar elemento de tarjeta recién creado al tarjetaContainer
         tarjetaContainer.innerHTML += content;
+        //console.log(tarjetaContainer);
     })
+}*/
+
+/*
+ * FUNCION QUE CREA LA TARJETA DESDE EL JS
+ */
+function createTarjeta() {
+    // var producto = data;
+
+    var tarjeta;
+    var tarjetaContainer = document.getElementById('tarjetaContainer');
+
+    //recorremos con buble for
+    for (var i = 0; i < producto.length; i++) {
+
+        let nombreProducto = producto[i].name.toLowerCase();
+        let valorProducto = producto[i].price.toString();
+        let stockProducto = producto[i].stock.toString(); //se convierte a string para que se pueda realizar la busqueda 
+
+        //Se crea la tarjeta y su contenido
+        tarjeta = document.createElement('div');
+        tarjeta.className = 'card-body';
+
+        var cardName = document.createElement('h5');
+        cardName.textContent = nombreProducto; //valor de h5
+        cardName.className = 'card-name';
+
+        var cardPrice = document.createElement('p');
+        cardPrice.textContent = valorProducto + "€";
+        cardPrice.className = 'card-price';
+
+        var cardStock = document.createElement('p');
+        cardStock.textContent = "Units available: " + stockProducto;
+        cardStock.className = 'card-stock';
+
+        var button = document.createElement('button');
+        button.innerText = 'Buy Now';
+        button.className = 'card-button';
+
+        //button.addEventListener('click', ); 
 
 
-    /* console.log(tarjeta);
+        tarjeta.appendChild(cardName);
+        tarjeta.appendChild(cardPrice);
+        tarjeta.appendChild(cardStock);
+        tarjeta.appendChild(button);
 
-    let cardName = document.createElement("h5");
-    cardName.textContent = producto.name;
-    tarjeta.appendChild(cardName);
-
-    let cardPrice = document.createElement("p");
-    cardPrice.textContent = producto.price;
-    tarjeta.appendChild(cardPrice);
-
-    let cardStock = document.createElement("p");
-    cardStock.textContent = producto.stock;
-    tarjeta.appendChild(cardStock);
+        tarjetaContainer.append(tarjeta);
 
 
-    tarjetaContainer.appendChild(tarjeta);
-
-}); */
+        console.log(tarjeta);
+    }
 
 }
 
-function busqueda() {
+/*FUNCION QUE BUSCA POR NOMBRE DE PRODUCTO*/
+
+function myFilterFunction() {
+
 
     const busqueda = document.querySelector('#busqueda');
-    const boton = document.querySelector('#boton');
-    const resultado = document.querySelector('#resultado');
+    //const button = document.querySelector('#boton');
+    const resultado = document.getElementsByClassName('card-body');
 
+    const texto = busqueda.value.toLowerCase();
 
-    const filtrar = () => {
-        //Keyup
-        //console.log(busqueda.value);
-        const texto = busqueda.value.toLowerCase();
+    var names = [];
+    var prices = [];
+    var available = [];
 
-        resultado.innerHTML = ""; //string vacio
+    for (var i = 0; i < producto.length; i++) {
 
-        //recorremos con buble for,variable local = producto
-        for (let producto of data) {
-            let nombreProducto = producto.name.toLowerCase();
-            // const valorProducto = producto.price.toString(); se convierte a string para que se pueda realizar la busqueda 
+        let nombreProducto = producto[i].name.toLowerCase();
 
-            //busqueda por nombre ,si no encuentra ese texto va a retornar -1,
-            //busca el primer indice en el q se puede encontrar un elemento dado en el array
-            if ((nombreProducto.indexOf(texto) !== -1)) {
-                resultado.innerHTML += `<li> ${producto.name} `; //info dinamica
-            }
+        if (nombreProducto.includes(texto)) {
+
+            names.push(producto[i].name);
+            prices.push(producto[i].price);
+            available.push(producto[i].stock);
+            resultado[i].style.display = "";
+
+        } else {
+            resultado[i].style.display = "none";
         }
-        //si inner sigue vacio y nunca entro al for pues devuelve producto no encontrado
-        if (resultado.innerHTML === "") {
-            resultado.innerHTML += `<li>not found...</li>`;
 
-        }
 
     }
 
-    //se ejecuta lo que esta dentro de la const filtrar.agrego el evento click al boton
-    boton.addEventListener('click', filtrar);
-    //Agrego el evento keypUp a la busqueda
-    busqueda.addEventListener('keyup', filtrar);
-    filtrar();
-}
 
-//agregar carrito de compra
-
-/*var contenido = document.querySelector('#contenido')
-function traer (){
-	fetch ('http://randomuser.me/api/')
-	.then(res =>res.json()) 
-	.then(data => {
-		console.log(data.results['0'])
-		contenido.innerHTML =`
-		<img src="${data.results ['0'].picture.large}" width="100px" class="img-fluid rounded-circle" >
-		<p>Last Name: ${data.results ['0'].name.last}</p>`	
-	})
 }
-*/
+//console.log();

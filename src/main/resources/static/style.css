@@ -139,8 +139,50 @@ h2 {
     text-shadow: yellow 0.1em 0.1em 0.2em
 }
 
-.card {
+#tarjetaContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+@media only screen and (min-width: 500px) {
+    #tarjetaContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 850px) {
+    #tarjetaContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.card-body {
     margin: 2%;
+    width: 98%;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+p.card-stock {
+    color: #ffc107;
+}
+
+.card-button {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    margin-bottom: 2rem;
+    width: 20%;
+    cursor: pointer;
+    display: flex;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 3px #999;
 }
 
 

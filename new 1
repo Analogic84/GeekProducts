@@ -1,0 +1,44 @@
+
+    
+    
+    /*las constantes para localizar elementos del HTML*/
+    const busqueda = document.getElementById('busqueda');
+    const tarjetaContainer = document.getElementById('tarjetaContainer');
+
+
+    //console.log(busqueda.value);
+    const texto = input.value.toLowerCase();
+
+    // var producto = data;
+    var names = [];
+    var prices = [];
+    var available = [];
+
+    /*recorremos con buble for*/
+    for (var i = 0; i < producto.length; i++) {
+
+        let nombreProducto = producto[i].name.toLowerCase();
+        let valorProducto = producto[i].price.toString();
+        let stockProducto = producto[i].stock.toString(); /* se convierte a string para que se pueda realizar la busqueda */
+
+
+        //console.log(nombreProducto, valorProducto, stockProducto);
+
+
+        /*busqueda por nombre*/
+        if (nombreProducto.includes(texto.toLowerCase())) {
+
+            names.push(producto[i].name);
+            prices.push(producto[i].price);
+            available.push(producto[i].stock);
+
+
+            //console.log(nombreProducto);
+
+        }
+
+    }
+
+
+
+    console.log(names, prices, available);
