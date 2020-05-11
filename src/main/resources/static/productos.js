@@ -23,6 +23,13 @@ function getData() {
         //createTable();
         createTarjeta();
         myFilterFunction();
+        //renderItems()
+        addToCart();
+        renderizarCarrito();
+        borrarItemCarrito();
+        calcularTotal();
+
+
         //console.log(data);
 
 
@@ -31,10 +38,7 @@ function getData() {
     })
 }
 getData();
-
-/*
- * FUNCION PARA OBTENER INFORMACION DEL DATA
- */
+/*FUNCION PARA OBTENER INFORMACION DEL DATA*/
 function getInfo() {
     var producto = data;
     var names = [];
@@ -54,7 +58,7 @@ function getInfo() {
 }
 
 /* 
- * FUNCION QUE CREA UNA TABLA
+ FUNCION QUE CREA UNA TABLA
 function createTable() {
     // se crea la tabla
     const cuerpoTabla = document.querySelector("#cuerpoTabla");
@@ -86,7 +90,7 @@ function createTable() {
     });
 } */
 
-/*FUNCION QUE CREA LA TARJETA*/
+/*FUNCION QUE CREA LA TARJETA FORMA1*/
 /*function createTarjeta() {
 
     const tarjetaContainer = document.getElementById("tarjetaContainer");
@@ -122,25 +126,27 @@ function createTable() {
     })
 }*/
 
-/*
- * FUNCION QUE CREA LA TARJETA DESDE EL JS
- */
+/* CREA LA TARJETA DESDE JS FORMA2*/
 function createTarjeta() {
     // var producto = data;
 
     var tarjeta;
     var tarjetaContainer = document.getElementById('tarjetaContainer');
+    let $items = document.querySelector('#items');
+
 
     //recorremos con buble for
     for (var i = 0; i < producto.length; i++) {
 
-        let nombreProducto = producto[i].name.toLowerCase();
+        let nombreProducto = producto[i].name;
         let valorProducto = producto[i].price.toString();
         let stockProducto = producto[i].stock.toString(); //se convierte a string para que se pueda realizar la busqueda 
+        ;
 
         //Se crea la tarjeta y su contenido
         tarjeta = document.createElement('div');
         tarjeta.className = 'card-body';
+
 
         var cardName = document.createElement('h5');
         cardName.textContent = nombreProducto; //valor de h5
@@ -154,20 +160,20 @@ function createTarjeta() {
         cardStock.textContent = "Units available: " + stockProducto;
         cardStock.className = 'card-stock';
 
-        var button = document.createElement('button');
-        button.innerText = 'Buy Now';
-        button.className = 'card-button';
+        let button = document.createElement('button');
+        button.classList.add('btn', 'btn-warning');
+        button.textContent = 'Add +';
+        button.setAttribute('marcador', producto['name']);
+        button.addEventListener('click', addToCart);
 
-        //button.addEventListener('click', ); 
-
-
+        // Insertamos   
         tarjeta.appendChild(cardName);
         tarjeta.appendChild(cardPrice);
         tarjeta.appendChild(cardStock);
         tarjeta.appendChild(button);
 
         tarjetaContainer.append(tarjeta);
-
+        $items.appendChild(tarjeta);
 
         console.log(tarjeta);
     }
@@ -175,7 +181,6 @@ function createTarjeta() {
 }
 
 /*FUNCION QUE BUSCA POR NOMBRE DE PRODUCTO*/
-
 function myFilterFunction() {
 
 
@@ -206,7 +211,88 @@ function myFilterFunction() {
 
 
     }
-
+    //console.log();
 
 }
-//console.log();
+
+/**
+ * FUNCIONES PARA EL CARRITO DE LA COMPRA
+ */
+
+let $items = document.querySelector('#items');
+let carrito = [];
+let total = 0;
+let $carrito = document.querySelector('#carrito');
+let $total = document.querySelector('#total');
+// Funciones
+
+function addToCart() {
+    // Añadimos el Nodo a nuestro carrito
+    carrito.push(this.getAttribute('marcador'));
+    // Calculo el total
+    calcularTotal();
+    // Renderizamos el carrito 
+    renderizarCarrito();
+
+}
+
+function renderizarCarrito() {
+    // Vaciamos todo el html
+    $carrito.textContent = '';
+    // Quitamos los duplicados
+    let carritoSinDuplicados = [...new Set(carrito)];
+    // Generamos los Nodos a partir de carrito
+    carritoSinDuplicados.forEach(function(item) {
+        // Obtenemos el item que necesitamos de la variable base de datos
+        let miItem = data.filter(function(itemBaseDatos) {
+            return itemBaseDatos['name'] == item;
+        });
+        // Cuenta el número de veces que se repite el producto
+        let numeroUnidadesItem = carrito.reduce(function(total, itemId) {
+            return itemId === item ? total += 1 : total;
+        }, 0);
+        // Creamos el nodo del item del carrito
+        let miNodo = document.createElement('li');
+        miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+        miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0],producto['name']} - ${miItem[0],producto['price']}€`;
+        // Boton de borrar
+        let miBoton = document.createElement('button');
+        miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+        miBoton.textContent = 'X';
+        miBoton.style.marginLeft = '1rem';
+        miBoton.setAttribute('item', item);
+        miBoton.addEventListener('click', borrarItemCarrito);
+        // Mezclamos nodos
+        miNodo.appendChild(miBoton);
+        $carrito.appendChild(miNodo);
+    })
+}
+
+function borrarItemCarrito() {
+    console.log()
+        // Obtenemos el producto ID que hay en el boton pulsado
+    let id = this.getAttribute('item');
+    // Borramos todos los productos
+    carrito = carrito.filter(function(carritoId) {
+        return carritoId !== id;
+    });
+    // volvemos a renderizar
+    renderizarCarrito();
+    // Calculamos de nuevo el precio
+    calcularTotal();
+}
+
+function calcularTotal() {
+    // Limpiamos precio anterior
+    total = 0;
+    // Recorremos el array del carrito
+    for (let item of carrito) {
+        // De cada elemento obtenemos su precio
+        let miItem = data.filter(function(itemBaseDatos) {
+            return itemBaseDatos['name'] == item;
+        });
+        total = total + miItem[0], producto['price'];
+    }
+    // Renderizamos el precio en el HTML
+    $total.textContent = total.toFixed(2);
+}
