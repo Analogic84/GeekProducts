@@ -60,7 +60,7 @@ h1 a {
     text-align: center;
 }
 
-li#miniCarrito {
+img.mitad {
     padding: 4px;
     margin: 0px;
     position: absolute;
@@ -216,13 +216,22 @@ td {
 }
 */
 
-.carritoContainer {
+#carritoContainer {
     display: grid;
     float: inline-start;
 }
 
 .rowCart {
     display: flex;
+    text-align: center;
+}
+
+aside #derecha {
+    display: inline-table;
+    width: 80%;
+}
+
+.cartTitle {
     text-align: center;
 }
 
